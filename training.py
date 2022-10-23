@@ -3,10 +3,12 @@ import wandb
 import tqdm
 import gc
 
+
 def train(model, train_loader, validation_loader, epochs, optimizer, evaluation_per_step=10, acc_step=1):
     wandb.watch(model, log_freq=evaluation_per_step)
     for epoch in range(epochs):
-        print(f'+++++++++++++++++++++++++++++++++++++++++ epoch: {epoch + 1} ++++++++++++++++++++++++++++++++++++++++++++')
+        print(
+            f'+++++++++++++++++++++++++++++++++++++++++ epoch: {epoch + 1} ++++++++++++++++++++++++++++++++++++++++++++')
         print('training...')
 
         cnt = 0
@@ -29,8 +31,9 @@ def train(model, train_loader, validation_loader, epochs, optimizer, evaluation_
                 print(f'count: {cnt}')
                 print(f'********accuracy: {accuracy1} ********')
                 print(f'********loss: {total_loss / evaluation_per_step} ********')
-                
-                wandb.log({"train/train-acc": accuracy2, "train/eval-acc": accuracy1, "train/loss": total_loss / evaluation_per_step})
+
+                wandb.log({"train/train-acc": accuracy2, "train/eval-acc": accuracy1,
+                           "train/loss": total_loss / evaluation_per_step})
 
                 total_loss = 0
             # if i % 20 == 0:
@@ -38,7 +41,7 @@ def train(model, train_loader, validation_loader, epochs, optimizer, evaluation_
             #     print('torch cache cleaned!')
             # torch.cuda.empty_cache()
             # print('torch cache cleaned!')
-            
+
             if cnt % acc_step == 0:
                 loss = model.get_loss(model((element1, element2)))
                 total_loss += loss.detach().cpu().item()

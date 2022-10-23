@@ -16,7 +16,8 @@ os.environ['CUDA_LAUNCH_BLOCKING'] = "1"
 
 warnings.filterwarnings("ignore")
 
-path = 'autodl-tmp/msa_output/'
+# path = 'autodl-tmp/msa_output/'
+path = 'data/msa_output/'
 
 train_batch_size = 2
 validation_batch_size = 2

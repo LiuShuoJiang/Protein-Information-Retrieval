@@ -10,11 +10,13 @@ import wandb
 import warnings
 import os
 import gc
+
 os.environ['CUDA_LAUNCH_BLOCKING'] = "1"
 
 warnings.filterwarnings("ignore")
 
-path = 'autodl-tmp/msa_output/'
+# path = 'autodl-tmp/msa_output/'
+path = 'data/msa_output/'
 
 train_batch_size = 4
 validation_batch_size = 2
@@ -36,6 +38,7 @@ def init_wandb():
         settings=wandb.Settings(start_method="fork")
     )
 
+
 if __name__ == '__main__':
     torch.multiprocessing.set_start_method('spawn')
     gc.collect()
@@ -48,7 +51,7 @@ if __name__ == '__main__':
 
     model = MySimpleRepresentation()
     model.to(device=device)
-    
+
     count = 0
     # for child in model.children():
     #     for son in child.children():
@@ -57,7 +60,7 @@ if __name__ == '__main__':
     #             if count >= 13:
     #                 for param in daughter.parameters():
     #                     param.requires_grad = False
-    
+
     # for child in model.children():
     #     for son in child.children():
     #         count += 1
@@ -66,7 +69,7 @@ if __name__ == '__main__':
     #                 param.requires_grad = False
 
     # output = model.forward_once(coords=coords)
-    
+
     init_wandb()
 
     train_path = 'split/train_split.csv'
@@ -85,7 +88,8 @@ if __name__ == '__main__':
 
     batch_converter = MyBatchConverter(alphabet)
 
-    train_loader = DataLoader(dataset=training_set, collate_fn=batch_converter, batch_sampler=train_batch, num_workers=12)
+    train_loader = DataLoader(dataset=training_set, collate_fn=batch_converter, batch_sampler=train_batch,
+                              num_workers=12)
     val_loader = DataLoader(dataset=validation_set, collate_fn=batch_converter, batch_sampler=val_batch, num_workers=12)
 
     optimizer = AdamW(model.parameters(), lr=lr)

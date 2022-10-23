@@ -6,7 +6,8 @@ import numpy as np
 import Bio.SeqIO
 from esm.inverse_folding.util import load_structure, extract_coords_from_structure, load_coords, BatchConverter
 
-database_path = 'autodl-tmp/swissprot_pdb_v2/'
+# database_path = 'autodl-tmp/swissprot_pdb_v2/'
+database_path = 'data/swissprot_pdb_v2/'
 device = torch.device('cuda')
 # device = torch.device('cpu')
 
