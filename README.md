@@ -19,3 +19,19 @@ We use [Alphafold protein structure database](https://alphafold.ebi.ac.uk/), see
 ## App
 
 The app will be constructed later.
+
+## Package Requirements
+
+[Pytorch Geometric](https://pytorch-geometric.readthedocs.io/en/latest/)
+
+[Biopython](https://biopython.org/)
+
+[Biotite](https://github.com/biotite-dev/biotite)
+
+[FAIR-ESM](https://github.com/facebookresearch/esm)
+
+[Foldseek](https://github.com/steineggerlab/foldseek)
+
+[Pandas](https://pandas.pydata.org/)
+
+[WandB](https://wandb.ai/)
