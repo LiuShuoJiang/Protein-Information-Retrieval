@@ -7,6 +7,7 @@ from esm.inverse_folding.util import rbf, normalize, nan_to_num, get_rotation_fr
 from esm.inverse_folding.gvp_utils import flatten_graph, unflatten_graph
 
 
+# Referenced from the https://github.com/facebookresearch/esm implementation
 class GVPGraphEmbedding(GVPInputFeaturizer):
     def __init__(self):
         super().__init__()

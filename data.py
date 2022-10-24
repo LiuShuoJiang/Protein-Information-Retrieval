@@ -30,7 +30,8 @@ class MyProteinDataset(Dataset):
         # structure2 = load_structure(protein_name2)
         coordinates1 = list(load_coords(protein_name1, chain=None))
         coordinates2 = list(load_coords(protein_name2, chain=None))
-        
+
+        # Reduce protein sequence length to 512 or less to avoid excessive cuda memory usage
         if len(coordinates1[1]) > 512:
             coordinates1[0] = coordinates1[0][:512, :]
             coordinates1[1] = coordinates1[1][:512]
@@ -56,6 +57,7 @@ class MyProteinDataset(Dataset):
         return batches
 
 
+# Referenced from the https://github.com/facebookresearch/esm/blob/main/esm/inverse_folding/util.py implementation
 class MyBatchConverter(BatchConverter):
     def __call__(self, raw_batch, device=device):
         self.alphabet.cls_idx = self.alphabet.get_idx("<cath>")
