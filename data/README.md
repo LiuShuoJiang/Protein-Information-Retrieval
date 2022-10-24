@@ -2,6 +2,8 @@
 
 > If you do not want to prepare for the data manually, please download the "data.zip" file directly from BaiduYun: [https://pan.baidu.com/s/1NZDzNDHBI5cx0AeXC48p7g](https://pan.baidu.com/s/1NZDzNDHBI5cx0AeXC48p7g) (password: wpj7) and extract it to "data/" folder from the project root.
 
+> Update: I've also uploaded the whole data folder to Onedrive, check [this link](https://1drv.ms/u/s!AkWnPAbKHjCo0yUoGHDIGYQ-v4UU?e=2exqIj).
+
 All the following operations are based on the data folder.
 
 ## Download and Set up Datasets
