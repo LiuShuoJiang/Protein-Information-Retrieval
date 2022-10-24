@@ -22,6 +22,8 @@ def train(model, train_loader, validation_loader, epochs, optimizer, evaluation_
             # to cuda?
             # element1 = element1.to('cuda')
             # element2 = element2.to('cuda')
+
+            # evaluate the model every "evaluation_per_step"s
             if cnt % evaluation_per_step == 0:
                 accuracy1 = evaluate_model(model, validation_loader)
                 accuracy2 = evaluate_model(model, train_loader)
@@ -46,9 +48,12 @@ def train(model, train_loader, validation_loader, epochs, optimizer, evaluation_
                 loss = model.get_loss(model((element1, element2)))
                 total_loss += loss.detach().cpu().item()
                 optimizer.zero_grad()
+
+                # clean cuda cache (otherwise it will cause cuda out of memory error(っ °Д °;)っ)
                 gc.collect()
                 torch.cuda.empty_cache()
                 print('torch cache cleaned!')
+
                 print(f'start backward {cnt}...')
                 loss.backward()
                 print(f'successfully end backward {cnt}')
@@ -57,7 +62,8 @@ def train(model, train_loader, validation_loader, epochs, optimizer, evaluation_
                 loss = model.get_loss(model((element1, element2)))
                 loss.backward()
 
-        torch.save(model.state_dict(), './autodl-tmp/saved_model/' + str(epoch + 100) + '.pth')
+        # torch.save(model.state_dict(), './autodl-tmp/saved_model/' + str(epoch + 100) + '.pth')
+        torch.save(model.state_dict(), './saved_models/' + str(epoch + 100) + '.pth')
         print(f'saved epoch {epoch} model successfully!')
 
 
